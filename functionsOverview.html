@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Functions</title>
+  </head>
+  <body>
+    <style media="screen">
+      body {
+        font-family: arial;
+      }
+
+      .container {
+        margin: 0 auto;
+        width: 700px;
+      }
+
+      xmp {
+        background-color: #000;
+        color: #15df0e;
+      }
+    </style>
+<div class = "container">
+
+    <h2>Traditionally Invoked Functions</h2>
+        <ul>
+          <li>Invoking a function stops the execution</li>
+          <li>Ex. of Traditional invocation ---> plus (a,b);</li>
+          <li>With traditional invocation, "this" ouputs as the global object</li>
+          <li>By looking at the console, we can see that the the window object has been outputed</li>
+        </ul>
+        <xmp>
+          function plus(a,b) {
+            return (
+            console.log(a+b),
+            console.log(this),
+            console.log(arguments)
+            )
+          }
+
+          plus(5,2);
+        </xmp>
+        <br>
+      <input type="button" name="name" value="Click Me" id="ex1">
+
+        <div id="results1"></div>
+
+    <h2>Using Functions as Objects (Invoking as Methods)</h2>
+      <ul>
+        <li> A method is a function that has been assigned as a property of an object.</li>
+        <li> As you can see on the console, "this" now returns the object where its scope currently resides. Which is calc</li>
+      </ul>
+      <xmp>
+        var calc = {
+          theStatus:"awesome",
+          plus: function (a,b) {
+            return (
+              console.log(this),
+              console.log(a + b),
+              console.log(arguments),
+              console.log(this.theStatus)
+            )
+          }
+        }
+          calc.plus(5,6);
+      </xmp>
+    <input type="button" name="name" value="Click Me" id="ex2">
+
+    <h2>Invoking Functions as Constrictors</h2>
+      <ul>
+        <li>Functions can constuct objects</li>
+        <li>We use the "new" keyword and this method is called constuctor invocation</li>
+        <li>"new" creates a new instance of the dog object with breed: "Doverman", name: "Rover" </li>
+        <li>"this" points to the instance of the object</li>
+      </ul>
+      <xmp>
+        var Dog = function () {
+          var name,
+              breed;
+           return console.dir(this); // returns directory of object
+        }
+
+        firstDog = new Dog;
+        firstDog.name = "Rover";
+        firstDog.breed = "Doverman";
+
+        console.log(firstDog.name);
+
+        secondDog = new Dog;
+        secondDog.name = "Fluffy";
+        secondDog.breed = "Poodle";
+
+        console.log(secondDog.name);
+      </xmp>
+      <input type="button" name="name" value="Click Me" id="ex3">
+
+  <h2>Expanding Objects through Prototype</h2>
+    <ul>
+      <li>Javascript is known as a prototypical inheritance language</li>
+      <li>You can give the functionality of an object to another object</li>
+      <li>prototype object gives you access</li>
+      <li>So by looking at <xmp>Cat.prototype.Catspeak = speak; </xmp>
+        We are accessing the prototype of <xmp>Cat</xmp>
+        And giving it a method called <xmp>Catspeak</xmp>
+        That will inherit the functionality from the function <xmp>speak</xmp>
+      </li>
+      <li>All Objects inherit properties</li>
+    </ul>
+    <xmp>
+      function speak (sayWhat) {
+        console.log(sayWhat);
+      }
+
+      var Dog = function () {
+        var name,
+            breed
+      }
+
+      var Cat = function () {
+        var name,
+            breed;
+      }
+
+      Cat.prototype.Catspeak = speak;   //Gives the cat the ability to speak cat
+      Dog.prototype.Dogspeak = speak;   //Gives the cat the ability to speak dog
+
+      firstCat = new Cat;
+      firstCat.name = "Chococat";
+      firstCat.breed = "Bengal";
+      firstCat.Catspeak("Meow");
+      console.log(firstCat);
+
+      firstDog = new Dog;
+      firstDog.name = "Rover";
+      firstDog.breed = "Doberman";
+      firstDog.Dogspeak("Woof"); //
+      console.log(firstDog);
+
+    </xmp>
+  <input type="button" name="name" value="Click Me" id="ex4">
+
+
+</div>
+
+    <script type="text/javascript">
+
+document.getElementById("ex1").addEventListener("click", example1);
+
+    //Traditionally invoked Functions
+function example1 () {
+  event.preventDefault();
+      function plus(a,b) {
+        return (
+        console.log(a+b),
+        console.log(this),
+        console.log(arguments)
+        )
+      }
+
+      plus(5,2);
+
+}
+
+      document.getElementById("ex2").addEventListener("click", example2);
+
+      function example2 () {
+        event.preventDefault();
+
+        var calc = {
+          theStatus:"awesome",
+          plus: function (a,b) {
+            return (
+              console.log(this),
+              console.log(a + b),
+              console.log(arguments),
+              console.log(this.theStatus)
+            )
+          }
+        }
+          calc.plus(5,6);
+      }
+
+    document.getElementById("ex3").addEventListener("click", example3);
+
+    function example3 () {
+      event.preventDefault();
+
+      var Dog = function () {
+        var name,
+            breed;
+         return console.dir(this);
+      }
+
+      firstDog = new Dog;
+      firstDog.name = "Rover";
+      firstDog.breed = "Doverman";
+
+      console.log(firstDog.name);
+
+      secondDog = new Dog;
+      secondDog.name = "Fluffy";
+      secondDog.breed = "Poodle";
+      console.log(secondDog.name);
+
+    }
+
+    //////////////////////  PROTOTYPE  ////////////////////////////////////////
+
+    document.getElementById("ex4").addEventListener("click", example4);
+
+    function example4 () {
+      event.preventDefault();
+
+      function speak (sayWhat) {
+        console.log(sayWhat);
+      }
+
+      var Dog = function () {
+        var name,
+            breed
+      }
+
+      var Cat = function () {
+        var name,
+            breed;
+      }
+
+      Cat.prototype.Catspeak = speak; //Gives the cat the ability to speak
+      Dog.prototype.Dogspeak = speak;
+
+      firstCat = new Cat;
+      firstCat.name = "Chococat";
+      firstCat.breed = "Bengal";
+      firstCat.Catspeak("Meow");
+      console.log(firstCat);
+
+      firstDog = new Dog;
+      firstDog.name = "Rover";
+      firstDog.breed = "Doberman";
+      firstDog.Dogspeak("Woof"); //
+      console.log(firstDog);
+
+    }
+
+    </script>
+  </body>
+</html>
