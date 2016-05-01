@@ -18,7 +18,9 @@
       xmp {
         background-color: #000;
         color: #15df0e;
+        border-radius: 10px;
       }
+
     </style>
 <div class = "container">
 
@@ -28,6 +30,7 @@
           <li>Ex. of Traditional invocation ---> plus (a,b);</li>
           <li>With traditional invocation, "this" ouputs as the global object</li>
           <li>By looking at the console, we can see that the the window object has been outputed</li>
+          <li>In this example, we are returning values as parameters. return ()</li>
         </ul>
         <xmp>
           function plus(a,b) {
@@ -42,8 +45,8 @@
         </xmp>
         <br>
       <input type="button" name="name" value="Click Me" id="ex1">
-
-        <div id="results1"></div>
+      <input type="button" name="name" value="Remove" id="removeEx1">
+          <div id="results1"></div>
 
     <h2>Using Functions as Objects (Invoking as Methods)</h2>
       <ul>
@@ -51,7 +54,7 @@
         <li> As you can see on the console, "this" now returns the object where its scope currently resides. Which is calc</li>
       </ul>
       <xmp>
-        var calc = {
+      var calc = {
           theStatus:"awesome",
           plus: function (a,b) {
             return (
@@ -65,7 +68,8 @@
           calc.plus(5,6);
       </xmp>
     <input type="button" name="name" value="Click Me" id="ex2">
-
+    <input type="button" name="name" value="Remove" id="removeEx2">
+      <div id="results2"></div>
     <h2>Invoking Functions as Constrictors</h2>
       <ul>
         <li>Functions can constuct objects</li>
@@ -144,12 +148,16 @@
 
     <script type="text/javascript">
 
-document.getElementById("ex1").addEventListener("click", example1);
+////////////////////////////////////Example 1///////////////////////////////////
 
+document.getElementById("ex1").addEventListener("click", example1);
+document.getElementById('removeEx1').addEventListener("click", remove1);
     //Traditionally invoked Functions
 function example1 () {
   event.preventDefault();
       function plus(a,b) {
+        var x = (a+b);
+        document.getElementById('results1').innerHTML = "<h2>CONSOLE OUTPUT</h2>" + "<br>" + x + "<br>" + this + "<br>" + Array.from(arguments);
         return (
         console.log(a+b),
         console.log(this),
@@ -159,9 +167,18 @@ function example1 () {
 
       plus(5,2);
 
-}
+    };
+    function remove1 () {
+      event.preventDefault();
+      document.getElementById("results1").innerHTML = "";
+    };
+
+////////////////////////////////////Example 1 Ends//////////////////////////////
+
+////////////////////////////////////Example 2///////////////////////////////////
 
       document.getElementById("ex2").addEventListener("click", example2);
+      document.getElementById("removeEx2").addEventListener("click", remove2);
 
       function example2 () {
         event.preventDefault();
@@ -169,6 +186,8 @@ function example1 () {
         var calc = {
           theStatus:"awesome",
           plus: function (a,b) {
+            var x = (a+b);
+            document.getElementById("results2").innerHTML = "<h2>CONSOLE OUTPUT</h2>" + "<br>" + calc.length + "<br>" + x + "<br>" + Array.from(arguments) + "<br>" + (this.theStatus);
             return (
               console.log(this),
               console.log(a + b),
@@ -179,6 +198,14 @@ function example1 () {
         }
           calc.plus(5,6);
       }
+
+      function remove2 () {
+        document.getElementById('results2').innerHTML = "";
+      }
+
+////////////////////////////////////Example 2 Ends//////////////////////////////
+
+////////////////////////////////////Example 3///////////////////////////////////
 
     document.getElementById("ex3").addEventListener("click", example3);
 
@@ -204,7 +231,9 @@ function example1 () {
 
     }
 
-    //////////////////////  PROTOTYPE  ////////////////////////////////////////
+////////////////////////////////////Example 3 Ends//////////////////////////////
+
+////////////////////////////////////Example 4 Starts////////////////////////////
 
     document.getElementById("ex4").addEventListener("click", example4);
 
@@ -241,6 +270,8 @@ function example1 () {
       console.log(firstDog);
 
     }
+
+    ////////////////////////////////////Example 4 Stops/////////////////////////
 
     </script>
   </body>
