@@ -19,6 +19,15 @@
         background-color: #000;
         color: #15df0e;
         border-radius: 10px;
+        padding: 7px;
+      }
+
+      input {
+        cursor: pointer;
+      }
+
+      #results4 {
+        height: 250px;
       }
 
     </style>
@@ -97,6 +106,8 @@
         console.log(secondDog.name);
       </xmp>
       <input type="button" name="name" value="Click Me" id="ex3">
+      <input type="button" name="name" value="Remove" id="removeEx3">
+        <div id="results3"></div>
 
   <h2>Expanding Objects through Prototype</h2>
     <ul>
@@ -142,6 +153,8 @@
 
     </xmp>
   <input type="button" name="name" value="Click Me" id="ex4">
+  <input type="button" name="name" value="Remove" id="removeEx4">
+    <div id="results4"></div>
 
 
 </div>
@@ -187,7 +200,7 @@ function example1 () {
           theStatus:"awesome",
           plus: function (a,b) {
             var x = (a+b);
-            document.getElementById("results2").innerHTML = "<h2>CONSOLE OUTPUT</h2>" + "<br>" + calc.length + "<br>" + x + "<br>" + Array.from(arguments) + "<br>" + (this.theStatus);
+            document.getElementById("results2").innerHTML = "<h2>CONSOLE OUTPUT</h2>" + "<br>" + Object(JSON.stringify(calc,null,4)) + "<br />" + x + "<br>" + Array.from(arguments) + "<br>" + (this.theStatus);
             return (
               console.log(this),
               console.log(a + b),
@@ -208,6 +221,7 @@ function example1 () {
 ////////////////////////////////////Example 3///////////////////////////////////
 
     document.getElementById("ex3").addEventListener("click", example3);
+    document.getElementById("removeEx3").addEventListener("click", remove3);
 
     function example3 () {
       event.preventDefault();
@@ -229,19 +243,30 @@ function example1 () {
       secondDog.breed = "Poodle";
       console.log(secondDog.name);
 
+      document.getElementById("results3").innerHTML = "<h2>CONSOLE OUTPUT</h2>"  + "<p>Dog</p>" + Object(JSON.stringify(firstDog,null,4)) +"<br>" + firstDog.name + "<br>" + "<br>" + "<p>Dog</p>" + Object(JSON.stringify(secondDog,null,4)) + "<br>" + secondDog.name;
+
     }
+
+    function remove3 () {
+      document.getElementById("results3").innerHTML = "";
+    }
+
+
+
+
 
 ////////////////////////////////////Example 3 Ends//////////////////////////////
 
 ////////////////////////////////////Example 4 Starts////////////////////////////
 
     document.getElementById("ex4").addEventListener("click", example4);
-
+    document.getElementById("removeEx4").addEventListener("click", remove4);
     function example4 () {
       event.preventDefault();
 
       function speak (sayWhat) {
         console.log(sayWhat);
+        return document.getElementById("results4").innerHTML = sayWhat
       }
 
       var Dog = function () {
@@ -269,6 +294,11 @@ function example1 () {
       firstDog.Dogspeak("Woof"); //
       console.log(firstDog);
 
+      document.getElementById("results4").innerHTML = "<h2>CONSOLE OUTPUT</h2>" + "Meow" + "<br/>" +"Cat"+ Object(JSON.stringify(firstCat,null,4)) + "<p></p>" + "Woof" +"<br/>" + "Dog" +  Object(JSON.stringify(firstDog,null,4));
+    }
+
+    function remove4 () {
+      document.getElementById("results4").innerHTML = "";
     }
 
     ////////////////////////////////////Example 4 Stops/////////////////////////
